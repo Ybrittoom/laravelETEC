@@ -5,21 +5,33 @@ use App\Http\Controllers\Auth\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
-// Rota raiz e que foi configurada para mostrar a view login.blade.php
-Route::get('/', [LoginController::class, 'index'])->name('login');
+// ─── Rotas públicas ────────────────────────────────────────────────
+Route::get('/',      [LoginController::class, 'index'])->name('login');
+Route::post('/login',[LoginController::class, 'authenticate'])->name('login.post');
 
-// Rota para processar o envio (POST)
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.post');
+// ─── Rotas protegidas (exigem login) ───────────────────────────────
+Route::middleware('auth')->group(function () {
 
-// Rota para mostrar a view dashboard.blade.php
-Route::get('/dashboard', [DashboadController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Rota para mostrar a view users.blade.php
-Route::get('/users', [UsersController::class, 'index'])->name('users');
+    // Dashboard
+    //Route::get('/dashboard', [DashboadController::class, 'index'])->name('dashboard');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    // CRUD completo de Usuários
+    Route::get('/users',               [UsersController::class, 'index'])->name('users');
+    Route::get('/users/create',        [UsersController::class, 'create'])->name('users.create');
+    Route::post('/users/store',        [UsersController::class, 'store'])->name('users.store');
+    Route::get('/users/{id}/edit',     [UsersController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}',          [UsersController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}',       [UsersController::class, 'destroy'])->name('users.destroy');
 
-Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
+    Route::get('/home', [DashboadController::class, 'home'])->name('home');
+    Route::get('/dashboard', [DashboadController::class, 'index'])->name('dashboard');
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+    Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
 
-// Rota para salvar o novo usuário (POST)
-Route::post('/users/store', [UsersController::class, 'store'])->name('users.store');
+    // Rotas de Registro (Abertas)
+Route::get('/register', [LoginController::class, 'showRegister'])->name('register');
+Route::post('/register', [LoginController::class, 'store'])->name('register.post');
+
+});

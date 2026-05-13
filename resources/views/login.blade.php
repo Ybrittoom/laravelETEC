@@ -110,7 +110,7 @@
           <a href="#">Esqueci minha senha</a>
         </p>
         <p class="mb-0">
-          <a href="#" class="text-center">Registrar-se no sistema</a>
+          <a href="{{ route('register') }}" class="text-center">Registrar-se no sistema</a>
         </p>
       </div>
     </div>

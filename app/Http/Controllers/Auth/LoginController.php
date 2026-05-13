@@ -52,4 +52,24 @@ class LoginController extends Controller
         // Redireciona para a página de login ou home
         return redirect('/login');
     }
+
+    public function showRegister() {
+        return view('auth.register'); // Certifique-se de que a pasta e arquivo existam
+    }
+    
+    public function store(Request $request) {
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+    
+        User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+    
+        return redirect()->route('login')->with('success', 'Cadastro realizado! Agora faça o login.');
+    }
 }
