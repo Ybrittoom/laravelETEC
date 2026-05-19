@@ -198,8 +198,8 @@
     <!-- jQuery -->
     {{-- A diretiva @include do Blade serve para "copiar e colar" o conteúdo de um arquivo --}}
     @include('partials.scripts')
-    {{-- A diretiva @stack do Blade permite adicionar scripts específicos de uma página --}}
-    @stack('styles')
+    {{-- Scripts específicos de cada página --}}
+    @stack('scripts')
 </body>
 
 </html>

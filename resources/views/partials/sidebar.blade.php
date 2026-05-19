@@ -51,6 +51,15 @@
                 </ul>
             </li>
 
+            {{-- Chat --}}
+            <li class="nav-item">
+                <a href="{{ route('chat') }}"
+                   class="nav-link {{ request()->routeIs('chat') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-comments"></i>
+                    <p>Chat Interno</p>
+                </a>
+            </li>
+
             {{-- Logout --}}
             <li class="nav-item" style="margin-top: auto;">
                 <form action="{{ route('logout') }}" method="POST">
