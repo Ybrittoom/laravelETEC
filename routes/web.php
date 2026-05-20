@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
 
     // Dashboard
     Route::get('/home',      [DashboadController::class, 'home'])->name('home');
-    Route::get('/dashboard', [DashboadController::class, 'index'])->name('dashboard');
+   
 
     // CRUD completo de Usuários
     Route::get('/users',            [UsersController::class, 'index'])->name('users');
@@ -34,4 +34,9 @@ Route::middleware('auth')->group(function () {
     // Chat (acessível para todos os perfis autenticados)
     Route::get('/chat',  [ChatController::class, 'index'])->name('chat');
     Route::post('/chat', [ChatController::class, 'store'])->name('chat.store');
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/dashboard', [DashboadController::class, 'index'])->name('dashboard');
+        Route::post('/dashboard/ponto', [DashboadController::class, 'registerClock'])->name('ponto.registrar');
+    });
 });

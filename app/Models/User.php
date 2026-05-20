@@ -27,6 +27,11 @@ class User extends Authenticatable
         'profile',   // ← adicionar
     ];
 
+    public function clockEntries()
+    {
+        return $this->hasMany(ClockEntry::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
