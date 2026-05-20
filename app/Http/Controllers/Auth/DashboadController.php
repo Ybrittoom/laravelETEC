@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class DashboadController extends Controller
 {
+    // Rota /dashboard
     public function index()
     {
-
-        // Conta o total de registros na tabela 'users' do banco de dados
         $totalUsuarios = User::count();
-
-        // A função compact() passa a variável totalUsuarios para a view
         return view('dashboard', compact('totalUsuarios'));
+    }
+
+    // Rota /home — redireciona para o dashboard
+    public function home()
+    {
+        return redirect()->route('dashboard');
     }
 }
