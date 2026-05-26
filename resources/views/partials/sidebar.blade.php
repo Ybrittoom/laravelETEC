@@ -1,5 +1,4 @@
 <div class="sidebar">
-    {{-- Usuário logado --}}
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             <img src="{{ asset('dist/img/user2-160x160.jpg') }}"
@@ -10,7 +9,6 @@
         </div>
     </div>
 
-    {{-- Menu --}}
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column"
             data-widget="treeview" role="menu" data-accordion="false">
@@ -24,14 +22,35 @@
                 </a>
             </li>
 
+            {{-- Produtos --}}
+            <li class="nav-item {{ request()->routeIs('bikes*') ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link {{ request()->routeIs('bikes*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-bicycle"></i>
+                    <p>Produtos <i class="right fas fa-angle-left"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('bikes.index') }}"
+                           class="nav-link {{ request()->routeIs('bikes.index') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Listar Produtos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('bikes.create') }}"
+                           class="nav-link {{ request()->routeIs('bikes.create') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Novo Produto</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             {{-- Usuários --}}
             <li class="nav-item {{ request()->routeIs('users*') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link {{ request()->routeIs('users*') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-users"></i>
-                    <p>
-                        Usuários
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
+                    <p>Usuários <i class="right fas fa-angle-left"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
