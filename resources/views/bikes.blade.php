@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1><i class="fas fa-bicycle mr-2"></i>Produtos — Estoque</h1>
+                <h1><i class="fas fa-bicycle mr-2"></i>Bicicletas — Estoque</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -39,7 +39,7 @@
     <div class="row mb-3">
         <div class="col-md-4">
             <div class="info-box shadow-sm">
-                <span class="info-box-icon bg-info"><i class="fas fa-bicycle"></i></span>
+                <span class="info-box-icon bg-warning text-dark"><i class="fas fa-bicycle"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Total de Produtos</span>
                     <span class="info-box-number">{{ $totalBikes }}</span>
@@ -48,7 +48,7 @@
         </div>
         <div class="col-md-4">
             <div class="info-box shadow-sm">
-                <span class="info-box-icon {{ $lowStock > 0 ? 'bg-warning' : 'bg-success' }}">
+                <span class="info-box-icon {{ $lowStock > 0 ? 'bg-warning' : 'bg-danger' }}">
                     <i class="fas fa-exclamation-triangle"></i>
                 </span>
                 <div class="info-box-content">
@@ -69,11 +69,11 @@
     </div>
 
     {{-- Filtros + botão novo --}}
-    <div class="card card-outline card-primary">
+    <div class="card-outline card-warning">
         <div class="card-header">
             <h3 class="card-title"><i class="fas fa-filter mr-1"></i> Filtros</h3>
             <div class="card-tools">
-                <a href="{{ route('bikes.create') }}" class="btn btn-primary btn-sm">
+                <a href="{{ route('bikes.create') }}" class="btn btn-warning text-dark font-weight-bold">
                     <i class="fas fa-plus"></i> Novo Produto
                 </a>
             </div>
@@ -139,11 +139,13 @@
                 {{-- Imagem --}}
                 <div style="height:160px; background:#f0f2f5; overflow:hidden; position:relative;">
                     @if($bike->image)
-                        <img src="{{ asset('storage/' . $bike->image) }}"
-                             style="width:100%;height:100%;object-fit:cover;">
+                        {{-- Mudamos para asset('storage/...') --}}
+                        <img src="{{ asset('storage/' . $bike->image) }}" 
+                             alt="{{ $bike->name }}"
+                             style="width:100%; height:100%; object-fit:cover;">
                     @else
                         <div class="d-flex align-items-center justify-content-center h-100">
-                            <i class="fas fa-bicycle text-secondary" style="font-size:60px;opacity:0.3;"></i>
+                            <i class="fas fa-bicycle text-secondary" style="font-size:60px; opacity:0.3;"></i>
                         </div>
                     @endif
 
